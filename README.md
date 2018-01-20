@@ -15,4 +15,4 @@ npm install
 
 npm start
 
-Then you can access it in http://localhost:3000
+Then you can access it in http://localhost:3000/
