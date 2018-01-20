@@ -1,5 +1,6 @@
 {
   "name": "snakeladder",
+  "homepage": "https://satya-dash.github.io/snakeladder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
