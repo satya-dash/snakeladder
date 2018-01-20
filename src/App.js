@@ -73,7 +73,7 @@ class App extends Component {
         }
         console.log(this.squares);
     }
-    _runDice(arr,no){
+    _runDice(arr,no,pl){
         let prev_no = arr.reduce((a, b) => a + b, 0);
         let new_no = prev_no+no;
         let canvas = document.getElementById("board");
@@ -81,26 +81,26 @@ class App extends Component {
         if(prev_no){
             let prev_coord = this.squares[prev_no].split(',').map(el=>parseInt(el));
             context.fillStyle = prev_no % 2 === 0 ? "white" : "red";
-            context.fillText('P1',prev_coord[0],prev_coord[1]+65);
+            context.fillText('P'+pl,prev_coord[0],prev_coord[1]+65);
         }
         let new_coord = this.squares[new_no].split(',').map(el=>parseInt(el));;
         if(prev_no > 0)
             context.fillStyle = "black";
-        context.fillText('P1',new_coord[0],new_coord[1]+65);
+        context.fillText('P'+pl,new_coord[0],new_coord[1]+65);
     }
     rollADice(pl_no){
         let {no_rolled,playerList} = this.state;
         let no = Math.floor(Math.random() * 6) + 1;
         let sum = playerList[pl_no].reduce((a, b) => a + b, 0);
         if(sum+no > 100){
-            alert('Not a possible move');
+            alert('Not a possible move Player'+pl_no);
             return false;
         }
         no_rolled[pl_no] = no;
         let prev_list = JSON.parse(JSON.stringify(playerList[pl_no]));
         playerList[pl_no].push(no);
         this.setState({no_rolled,playerList},()=>{
-            this._runDice(prev_list,no);
+            this._runDice(prev_list,no,pl_no);
         });
     }
     _populateStatistics(pl_no){
